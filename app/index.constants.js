@@ -1,3 +1,10 @@
-/**
- * Created by Gerardo on 26/10/2016.
- */
+(function ()
+{
+    'use strict';
+
+    angular
+        .module('energyApp')
+        .constant('api', 'http://localhost/energy-app-server/public/');
+
+
+})();

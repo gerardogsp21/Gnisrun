@@ -6,7 +6,7 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp')
+angular.module('energyApp')
   .controller('FormCtrl', function($scope) {
-    
+   console.log('FormCtrl');
 });
