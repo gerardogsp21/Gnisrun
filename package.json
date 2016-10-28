@@ -1,9 +1,9 @@
 {
-  "name": "sb-admin",
+  "name": "ygrene-client",
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/start-angular/sb-admin-angular"
+    "url": "https://github.com/gerardogsp21/ygrene-client.git"
   },
   "dependencies": {},
   "devDependencies": {
