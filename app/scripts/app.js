@@ -23,7 +23,7 @@ angular
             events: true,
         });
 
-        $urlRouterProvider.otherwise('/dashboard/home');
+        $urlRouterProvider.otherwise('/dashboard/chart');
 
         $stateProvider
             .state('dashboard', {
