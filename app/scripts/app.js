@@ -110,7 +110,7 @@ angular
             .state('dashboard.chart', {
                 templateUrl: 'views/chart.html',
                 url: '/chart',
-                controller: 'ChartCtrl',
+                controller: 'ChartCtrl as vm',
                 resolve: {
                     loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({

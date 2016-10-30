@@ -6,20 +6,21 @@
  * Controller of the sbAdminApp
  */
 angular.module('energyApp')
-    .controller('ChartCtrl', ['$scope', '$timeout', 'Restangular', function ($scope, $timeout, Restangular) {
+    .controller('ChartCtrl', ['$timeout', 'Restangular', function ($timeout, Restangular) {
         var recursoMedidas = Restangular.all('usuarios/' + 1 + '/casas/' + 1);
-        $scope.medidas = [];
-        $scope.medidas220 = [];
-        $scope.title_1 = "Consumo de la linea 110 voltios";
-        $scope.title_2= "Consumo de la linea 220 voltios";
+        var vm = this;
+        vm.medidas = [];
+        vm.medidas220 = [];
+        vm.title_1 = "Consumo de la linea 110 voltios";
+        vm.title_2= "Consumo de la linea 220 voltios";
         activate();
-        $scope.line = {
+        vm.line = {
             onClick: function (points, evt) {
                 console.log(points, evt);
             }
         };
 
-        $scope.line2 = {
+        vm.line2 = {
             onClick: function (points, evt) {
                 console.log(points, evt);
             }
@@ -34,13 +35,13 @@ angular.module('energyApp')
             recursoMedidas.customGET("medidas", {fecha: "2016-10-26", voltaje: "110"})
                 .then(function (data) {
                     //Se ejecuta cuando est todo bien: cdigos 2xx (200, 201, etc)
-                    $scope.medidas = data.result;
+                    vm.medidas = data.result;
                     console.log(data.result);
-                    $scope.line.labels = getValoresDePropiedadEnArray($scope.medidas, 'hora');
-                    var valores110 = getValoresDePropiedadEnArray($scope.medidas, 'total_medida');
-                    console.log($scope.medidas);
+                    vm.line.labels = getValoresDePropiedadEnArray(vm.medidas, 'hora');
+                    var valores110 = getValoresDePropiedadEnArray(vm.medidas, 'total_medida');
+                    console.log(vm.medidas);
 
-                    $scope.line.data = [valores110];
+                    vm.line.data = [valores110];
                     //console.log(valores220);
 
                 })
@@ -54,14 +55,14 @@ angular.module('energyApp')
 
             recursoMedidas.customGET("medidas", {fecha: "2016-10-26", voltaje: "220"})
                 .then(function (data2) {
-                    $scope.medidas220 = data2.result;
-                    console.log($scope.medidas220);
-                    var valores220 = getValoresDePropiedadEnArray($scope.medidas220, 'total_medida');
+                    vm.medidas220 = data2.result;
+                    console.log(vm.medidas220);
+                    var valores220 = getValoresDePropiedadEnArray(vm.medidas220, 'total_medida');
                     if (valores220.length > 0) {
-                        $scope.line2.labels = getValoresDePropiedadEnArray($scope.medidas220, 'hora');
-                        $scope.line2.data = [valores220];
+                        vm.line2.labels = getValoresDePropiedadEnArray(vm.medidas220, 'hora');
+                        vm.line2.data = [valores220];
                     } else {
-                        $scope.title_2 = "No hay datos del consumo de 220 voltios"
+                        vm.title_2 = "No hay datos del consumo de 220 voltios"
                     }
 
                 })

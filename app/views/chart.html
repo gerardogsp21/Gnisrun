@@ -7,10 +7,10 @@
 <div class="row">
     <div class="col-lg-10 col-sm-12" id="line-chart">
         <div class="panel panel-default">
-            <div class="panel-heading">{{ title_1}}</div>
+            <div class="panel-heading">{{ vm.title_1}}</div>
             <div class="panel-body">
-                <canvas id="line" class="chart chart-line chart-xl" data="line.data" labels="line.labels"
-                        click="line.onClick"></canvas>
+                <canvas id="vm.line" class="chart chart-line chart-xl" data="vm.line.data" labels="vm.line.labels"
+                        click="vm.line.onClick"></canvas>
             </div>
         </div>
     </div>
@@ -18,10 +18,10 @@
     <div class="row">
         <div class="col-lg-10 col-sm-12" id="line-chart2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{ title_2 }}</div>
+                <div class="panel-heading">{{ vm.title_2 }}</div>
                 <div class="panel-body">
-                    <canvas id="line2" class="chart chart-line chart-xl" data="line2.data" labels="line2.labels"
-                            click="line2.onClick"></canvas>
+                    <canvas id="vm.line2" class="chart chart-line chart-xl" data="vm.line2.data" labels="vm.line2.labels"
+                            click="vm.line2.onClick"></canvas>
                 </div>
             </div>
         </div>
