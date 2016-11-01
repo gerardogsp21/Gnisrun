@@ -36,10 +36,9 @@ angular.module('energyApp')
                 .then(function (data) {
                     //Se ejecuta cuando est todo bien: cdigos 2xx (200, 201, etc)
                     vm.medidas = data.result;
-                    console.log(data.result);
                     vm.line.labels = getValoresDePropiedadEnArray(vm.medidas, 'hora');
                     var valores110 = getValoresDePropiedadEnArray(vm.medidas, 'total_medida');
-                    console.log(vm.medidas);
+
 
                     vm.line.data = [valores110];
                     //console.log(valores220);
@@ -56,7 +55,6 @@ angular.module('energyApp')
             recursoMedidas.customGET("medidas", {fecha: "2016-10-26", voltaje: "220"})
                 .then(function (data2) {
                     vm.medidas220 = data2.result;
-                    console.log(vm.medidas220);
                     var valores220 = getValoresDePropiedadEnArray(vm.medidas220, 'total_medida');
                     if (valores220.length > 0) {
                         vm.line2.labels = getValoresDePropiedadEnArray(vm.medidas220, 'hora');

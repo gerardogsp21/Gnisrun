@@ -7,12 +7,13 @@
  * # adminPosHeader
  */
 angular.module('energyApp')
-	.directive('headerNotification',function(){
-		return {
-        templateUrl:'scripts/directives/header/header-notification/header-notification.html',
-        restrict: 'E',
-        replace: true,
-    	}
-	});
+    .directive('headerNotification', function () {
+        return {
+            templateUrl: 'scripts/directives/header/header-notification/header-notification.html',
+            restrict: 'E',
+            replace: true,
+        }
+    });
+
 
 
