@@ -4,9 +4,42 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
 <div class="row">
-    <div class="col-lg-10 col-sm-12" id="line-chart">
-        <div class="panel panel-default">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="id_casa">Elegir dirección</label>
+            <select ng-change="vm.activate();" ng-model="vm.id_casa" class="form-control" id="id_casa"
+                    ng-options="casa as casa.direccion for casa in vm.casas track by casa.id">
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="id_casa">Elegir fecha</label>
+            <div class="form-inline">
+                <div class="input-group">
+                    <span class="input-group-addon navbar-default">Día</span>
+                    <select ng-change="vm.activate();" ng-model="vm.id_dia" class="form-control" id="id_dia"
+                            ng-options="dia as dia.numero for dia in vm.dias track by dia.id">
+                    </select>
+                    <span class="input-group-addon navbar-default" ng-model="vm.mes">Mes</span>
+                    <select ng-change="vm.activate();" ng-model="vm.id_mes" class="form-control" id="id_mes"
+                            ng-options="mes as mes.nombre for mes in vm.meses track by mes.id">
+                        <option value="0">Mes</option>
+                    </select>
+                    <span class="input-group-addon navbar-default" ng-model="vm.year">Año</span>
+                    <select ng-change="vm.activate();" ng-model="vm.id_year" class="form-control" id="id_year"
+                            ng-options="year as year.numero for year in vm.years track by year.id">
+                        <option value="0">Año</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-sm-12" id="line-chart">
+        <div class="panel panel-success">
             <div class="panel-heading">{{ vm.title_1}}</div>
             <div class="panel-body">
                 <canvas id="vm.line" class="chart chart-line chart-xl" data="vm.line.data" labels="vm.line.labels"
@@ -16,14 +49,70 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-10 col-sm-12" id="line-chart2">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ vm.title_2 }}</div>
+        <div class="col-md-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">Consumo de vatios actual</div>
                 <div class="panel-body">
-                    <canvas id="vm.line2" class="chart chart-line chart-xl" data="vm.line2.data" labels="vm.line2.labels"
-                            click="vm.line2.onClick"></canvas>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2><span class="text-energy">{{ vm.consumo_vatios_actual  | number}} KW</span></h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">Consumo de dinero actual</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>
+                                <i class="fa fa-usd  text-energy"></i>
+                                <span class="text-energy">{{ vm.total_actual  | number}}</span>
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">Consumo total en vatios</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>
+                                <span class="text-energy ">{{ vm.consumo_vatios | number }} KW </span>
+
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">Consumo de dinero total</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>
+                                <i class="fa fa-usd  text-energy"></i>
+                                <span class="text-energy">{{ vm.total  | number}}</span>
+                            </h2>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
+

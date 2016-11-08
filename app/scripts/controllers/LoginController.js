@@ -5,7 +5,6 @@ angular.module('energyApp')
             var vm = this;
 
             vm.login = function () {
-                console.log(vm.email);
                 $auth.login({
                     email: vm.email,
                     password: vm.password
@@ -23,7 +22,7 @@ angular.module('energyApp')
                     })
                     .catch(function (response) {
                         // Si ha habido errores llegamos a esta parte
-                        notify("Error con el servidor.");
+                        notify("Resultado inesperado comuniquese con el administrador del sistema.");
                     });
             }
 

@@ -4,72 +4,123 @@
  * @description
  * # MainCtrl
  * Controller of the sbAdminApp
+ *
  */
+
+
 angular.module('energyApp')
-    .controller('ChartCtrl', ['$timeout', 'Restangular', function ($timeout, Restangular) {
-        var recursoMedidas = Restangular.all('usuarios/' + 1 + '/casas/' + 1);
-        var vm = this;
-        vm.medidas = [];
-        vm.medidas220 = [];
-        vm.title_1 = "Consumo de la linea 110 voltios";
-        vm.title_2= "Consumo de la linea 220 voltios";
-        activate();
-        vm.line = {
-            onClick: function (points, evt) {
-                console.log(points, evt);
+    .controller('ChartCtrl', ['$timeout', 'Restangular',
+        function ($timeout, Restangular) {
+
+
+            var vm = this;
+            vm.medidas = [];
+            vm.casas = [];
+            vm.fecha;
+            vm.precio = 0;
+            vm.valores = [];
+            vm.consumo_vatios = 0;
+            vm.total = 0;
+            vm.consumo_vatios_actual = 0;
+            vm.total_actual = 0;
+            var hoy = new Date();
+
+
+            vm.title_1 = "Consumo de voltios";
+
+            vm.years = years();
+            vm.dias = dias();
+            vm.meses = meses();
+
+            vm.id_dia = {
+                id: hoy.getDate()
+            };
+
+            vm.id_mes = {
+                id: (hoy.getMonth() + 1),
+            };
+
+            vm.id_year = {
+                id: hoy.getFullYear()
+            };
+
+
+            var user = JSON.parse(sessionStorage.getItem("user"));
+
+            var recursoCasas = Restangular.all('usuarios/' + user.id + '/casas');
+
+            cargarCasas();
+
+
+            vm.line = {
+
+                onClick: function (points, evt) {
+                    console.log(points, evt);
+                }
+            };
+
+
+            vm.activate = function () {
+                cargarMedidas();
+                vm.precio = getOneValue(vm.casas, 'precio', 'id', vm.id_casa.id)
             }
-        };
 
-        vm.line2 = {
-            onClick: function (points, evt) {
-                console.log(points, evt);
+            function cargarCasas() {
+                recursoCasas.customGET()
+                    .then(function (data) {
+                        vm.casas = data.result;
+                        var primero = getValoresDePropiedadEnArray(vm.casas, 'id');
+                        vm.id_casa = {
+                            id: primero[0]
+                        };
+                        vm.activate();
+                    })
+                    .catch(function () {
+                        //Hay error: 4xx, 5xx (404, 500)..
+                    })
+                    .finally(function () {
+                        //Sin importar si hubo error o no, esto se ejecuta.
+                        //Sirve en caso de que coloques una barra "Cargando", y aqui la finalizas.
+                    });
+
+
             }
-        };
 
+            function cargarMedidas() {
+                vm.fecha = vm.id_year.id + "-" + vm.id_mes.id + "-" + vm.id_dia.id;
+                var recursoMedidas = Restangular.all('usuarios/' + user.id + '/casas/' + vm.id_casa.id);
+                recursoMedidas.customGET("medidas", {fecha: vm.fecha})
+                    .then(function (data) {
+                        vm.medidas = data.result;
+                        if (vm.medidas.length > 0) {
+                            vm.mostrar = true;
+                            vm.title_1 = "Consumo de voltios";
+                            vm.line.labels = getValoresDePropiedadEnArray(vm.medidas, 'hora');
+                            vm.valores = getValoresDePropiedadEnArray(vm.medidas, 'total_medida');
+                            vm.line.data = [vm.valores];
+                            vm.consumo_vatios = getSumaMedidas(vm.valores);
+                            vm.total = vm.consumo_vatios * vm.precio;
+                            vm.consumo_vatios_actual = vm.valores[vm.valores.length - 1];
+                            vm.total_actual = vm.consumo_vatios_actual * vm.precio;
+                        } else {
+                            vm.title_1 = "No hay consumo para la fecha seleccionada";
+                            vm.mostrar = false;
+                            vm.consumo_vatios = 0;
+                            vm.total = 0;
 
-        function activate() {
-            cargarMedidas();
-        }
+                            vm.line = {
+                                labels: ['No hay consumo'],
+                                data: [[0]]
+                            };
+                        }
+                    })
+                    .catch(function () {
+                        //Hay error: 4xx, 5xx (404, 500)..
+                    })
+                    .finally(function () {
+                        //Sin importar si hubo error o no, esto se ejecuta.
+                        //Sirve en caso de que coloques una barra "Cargando", y aqui la finalizas.
+                    });
+            }
+        }]);
 
-        function cargarMedidas() {
-            recursoMedidas.customGET("medidas", {fecha: "2016-10-26", voltaje: "110"})
-                .then(function (data) {
-                    //Se ejecuta cuando est todo bien: cdigos 2xx (200, 201, etc)
-                    vm.medidas = data.result;
-                    vm.line.labels = getValoresDePropiedadEnArray(vm.medidas, 'hora');
-                    var valores110 = getValoresDePropiedadEnArray(vm.medidas, 'total_medida');
-
-
-                    vm.line.data = [valores110];
-                    //console.log(valores220);
-
-                })
-                .catch(function () {
-                    //Hay error: 4xx, 5xx (404, 500)..
-                })
-                .finally(function () {
-                    //Sin importar si hubo error o no, esto se ejecuta.
-                    //Sirve en caso de que coloques una barra "Cargando", y aqui la finalizas.
-                });
-
-            recursoMedidas.customGET("medidas", {fecha: "2016-10-26", voltaje: "220"})
-                .then(function (data2) {
-                    vm.medidas220 = data2.result;
-                    var valores220 = getValoresDePropiedadEnArray(vm.medidas220, 'total_medida');
-                    if (valores220.length > 0) {
-                        vm.line2.labels = getValoresDePropiedadEnArray(vm.medidas220, 'hora');
-                        vm.line2.data = [valores220];
-                    } else {
-                        vm.title_2 = "No hay datos del consumo de 220 voltios"
-                    }
-
-                })
-                .catch(function () {
-                    //Hay error: 4xx, 5xx (404, 500)..
-                })
-                .finally(function () {
-                    //Sin importar si hubo error o no, esto se ejecuta.
-                    //Sirve en caso de que coloques una barra "Cargando", y aqui la finalizas.
-                });
-        }
-    }]);

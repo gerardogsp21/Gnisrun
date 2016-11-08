@@ -12,7 +12,6 @@ angular.module('energyApp')
             $auth.logout()
                 .then(function () {
                     var user = JSON.parse(sessionStorage.getItem("user"));
-                    console.log(user);
                     notify("Hasta pronto " + user.primer_nombre );
                     sessionStorage.removeItem("user");
 

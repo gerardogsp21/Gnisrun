@@ -17,17 +17,18 @@ angular
         'satellizer',
         'cgNotify'
     ])
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', 'api', 'RestangularProvider', '$authProvider',
-        function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, api, RestangularProvider, $authProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', 'api',
+        'RestangularProvider', '$authProvider',
+        function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, api, RestangularProvider, $authProvider ) {
             RestangularProvider.setBaseUrl(api);
             $authProvider.loginUrl = api + "iniciar-sesion";
             $authProvider.tokenName = "token";
             $authProvider.tokenPrefix = "energyApp";
 
-                $ocLazyLoadProvider.config({
-                    debug: false,
-                    events: true,
-                });
+            $ocLazyLoadProvider.config({
+                debug: false,
+                events: true,
+            });
 
             $urlRouterProvider.otherwise('/login');
 
@@ -141,7 +142,8 @@ angular
                                 name: 'chart.js',
                                 files: [
                                     'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                                    'bower_components/angular-chart.js/dist/angular-chart.css'
+                                    'bower_components/angular-chart.js/dist/angular-chart.css',
+                                    'js/utilities.js'
                                 ]
                             }),
                                 $ocLazyLoad.load({

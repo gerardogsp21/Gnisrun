@@ -1,21 +1,25 @@
 <div class="container">
+
     <div class="row">
         <div class="col-md-12">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span><img src="../imagenes/favicon.png"> ENERGYAPP</span></h3>
+                    <h3 class="panel-title"><span><img src="./imagenes/favicon.png"> ENERGYAPP</span></h3>
                 </div>
                 <div class="panel-body">
                     <form ng-submit="vm.login()" method="post">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" ng-model="vm.email" type="email" autofocus>
+                                <input class="form-control" placeholder="E-mail" name="email" ng-model="vm.email"
+                                       type="email" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" ng-model="vm.password" type="password" value="">
+                                <input class="form-control" placeholder="Password" name="password"
+                                       ng-model="vm.password" type="password" value="">
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <button  type="submit" class="navbar-default btn btn-lg btn-success btn-block" >Entrar</button>
+                            <button type="submit" class="navbar-default btn btn-lg btn-success btn-block">Entrar
+                            </button>
                         </fieldset>
                     </form>
                 </div>
