@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/start-angular/sb-admin-angular"
+    "url": "https://github.com/gerardogsp21/Gnisrun.git"
   },
   "dependencies": {
     "angular-websocket": "^2.0.1",
