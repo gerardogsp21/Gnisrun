@@ -88,7 +88,6 @@ angular
                 .state('login', {
                     templateUrl: 'views/login.html',
                     url: '/login',
-                    controller: 'LoginCtrl as vm',
                     resolve: {
                         loadMyFile: function ($ocLazyLoad) {
                             $ocLazyLoad.load({
