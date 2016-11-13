@@ -7,7 +7,7 @@
  * # adminPosHeader
  */
 
-angular.module('energyApp')
+angular.module('unicesarNNN')
   .directive('sidebarSearch',function() {
     return {
       templateUrl:'scripts/directives/sidebar/sidebar-search/sidebar-search.html',

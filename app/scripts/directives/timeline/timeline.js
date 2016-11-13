@@ -6,7 +6,7 @@
  * @description
  * # adminPosHeader
  */
-angular.module('energyApp')
+angular.module('unicesarNNN')
 	.directive('timeline',function() {
     return {
         templateUrl:'scripts/directives/timeline/timeline.html',

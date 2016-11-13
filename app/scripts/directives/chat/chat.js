@@ -6,7 +6,7 @@
  * @description
  * # adminPosHeader
  */
-angular.module('energyApp')
+angular.module('unicesarNNN')
 	.directive('chat',function(){
 		return {
         templateUrl:'scripts/directives/chat/chat.html',

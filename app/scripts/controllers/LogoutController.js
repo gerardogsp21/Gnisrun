@@ -2,7 +2,7 @@
  * Created by Gerardo on 31/10/2016.
  */
 
-angular.module('energyApp')
+angular.module('unicesarNNN')
     .controller('LogoutCtrl', ['$timeout', 'Restangular', '$auth', '$location',  'notify',
         function ($timeout, Restangular, $auth, $location, notify) {
 

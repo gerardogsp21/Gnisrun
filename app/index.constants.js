@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('energyApp')
+        .module('unicesarNNN')
         .constant('api', 'http://localhost/energy-app-server/public/');
 
 

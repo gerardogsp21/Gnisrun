@@ -6,7 +6,7 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
-angular.module('energyApp')
+angular.module('unicesarNNN')
   .controller('MainCtrl', function($scope,$position) {
     console.log('MainCtrl');
   });

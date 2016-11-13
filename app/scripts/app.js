@@ -8,7 +8,7 @@
  * Main module of the application.
  */
 angular
-    .module('energyApp', [
+    .module('unicesarNNN', [
         'oc.lazyLoad',
         'ui.router',
         'ui.bootstrap',
@@ -19,11 +19,11 @@ angular
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', 'api',
         'RestangularProvider', '$authProvider',
-        function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, api, RestangularProvider, $authProvider ) {
+        function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, api, RestangularProvider, $authProvider) {
             RestangularProvider.setBaseUrl(api);
             $authProvider.loginUrl = api + "iniciar-sesion";
             $authProvider.tokenName = "token";
-            $authProvider.tokenPrefix = "energyApp";
+            $authProvider.tokenPrefix = "unicesarNNN";
 
             $ocLazyLoadProvider.config({
                 debug: false,
@@ -41,7 +41,7 @@ angular
                         loadMyDirectives: function ($ocLazyLoad) {
                             return $ocLazyLoad.load(
                                 {
-                                    name: 'energyApp',
+                                    name: 'unicesarNNN',
                                     files: [
                                         'scripts/directives/header/header.js',
                                         'scripts/directives/header/header-notification/header-notification.js',
@@ -61,74 +61,40 @@ angular
                                     {
                                         name: 'ngAnimate',
                                         files: ['bower_components/angular-animate/angular-animate.js']
+                                    }),
+                                $ocLazyLoad.load(
+                                    {
+                                        name: 'ngCookies',
+                                        files: ['bower_components/angular-cookies/angular-cookies.js']
+                                    }),
+                                $ocLazyLoad.load(
+                                    {
+                                        name: 'ngResource',
+                                        files: ['bower_components/angular-resource/angular-resource.js']
+                                    }),
+                                $ocLazyLoad.load(
+                                    {
+                                        name: 'ngSanitize',
+                                        files: ['bower_components/angular-sanitize/angular-sanitize.js']
+                                    }),
+                                $ocLazyLoad.load(
+                                    {
+                                        name: 'ngTouch',
+                                        files: ['bower_components/angular-touch/angular-touch.js']
                                     })
-                            $ocLazyLoad.load(
-                                {
-                                    name: 'ngCookies',
-                                    files: ['bower_components/angular-cookies/angular-cookies.js']
-                                })
-                            $ocLazyLoad.load(
-                                {
-                                    name: 'ngResource',
-                                    files: ['bower_components/angular-resource/angular-resource.js']
-                                })
-                            $ocLazyLoad.load(
-                                {
-                                    name: 'ngSanitize',
-                                    files: ['bower_components/angular-sanitize/angular-sanitize.js']
-                                })
-                            $ocLazyLoad.load(
-                                {
-                                    name: 'ngTouch',
-                                    files: ['bower_components/angular-touch/angular-touch.js']
-                                })
                         }
                     }
-                })
-                .state('dashboard.home', {
-                    url: '/home',
-                    controller: 'MainCtrl',
-                    templateUrl: 'views/dashboard/home.html',
-                    resolve: {
-                        loadMyFiles: function ($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'energyApp',
-                                files: [
-                                    'scripts/controllers/main.js',
-                                    'scripts/directives/timeline/timeline.js',
-                                    'scripts/directives/notifications/notifications.js',
-                                    'scripts/directives/chat/chat.js',
-                                    'scripts/directives/dashboard/stats/stats.js'
-                                ]
-                            })
-                        }
-                    }
-                })
-                .state('dashboard.form', {
-                    templateUrl: 'views/form.html',
-                    url: '/form'
-                })
-                .state('dashboard.blank', {
-                    templateUrl: 'views/pages/blank.html',
-                    url: '/blank'
                 })
                 .state('login', {
-                    templateUrl: 'views/pages/login.html',
+                    templateUrl: 'views/login.html',
                     url: '/login',
                     controller: 'LoginCtrl as vm',
                     resolve: {
                         loadMyFile: function ($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'chart.js',
-                                files: [
-                                    'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                                    'bower_components/angular-chart.js/dist/angular-chart.css'
-                                ]
-                            }),
-                                $ocLazyLoad.load({
-                                    name: 'energyApp',
-                                    files: ['scripts/controllers/LoginController.js']
-                                })
+                            $ocLazyLoad.load({
+                                name: 'unicesarNNN',
+                                files: ['scripts/controllers/LoginController.js']
+                            })
                         }
                     }
                 })
@@ -147,39 +113,33 @@ angular
                                 ]
                             }),
                                 $ocLazyLoad.load({
-                                    name: 'energyApp',
+                                    name: 'unicesarNNN',
                                     files: ['scripts/controllers/chartContoller.js']
                                 })
                         }
                     }
                 })
-                .state('dashboard.table', {
-                    templateUrl: 'views/table.html',
-                    url: '/table'
+                .state('dashboard.inicio', {
+                    templateUrl: 'views/inicio.html',
+                    url: '/inicio',
+                    resolve: {
+                        loadMyFile: function ($ocLazyLoad) {
+                            $ocLazyLoad.load({
+                                name: 'unicesarNNN'
+                            })
+                        }
+                    }
                 })
-                .state('dashboard.panels-wells', {
-                    templateUrl: 'views/ui-elements/panels-wells.html',
-                    url: '/panels-wells'
-                })
-                .state('dashboard.buttons', {
-                    templateUrl: 'views/ui-elements/buttons.html',
-                    url: '/buttons'
-                })
-                .state('dashboard.notifications', {
-                    templateUrl: 'views/ui-elements/notifications.html',
-                    url: '/notifications'
-                })
-                .state('dashboard.typography', {
-                    templateUrl: 'views/ui-elements/typography.html',
-                    url: '/typography'
-                })
-                .state('dashboard.icons', {
-                    templateUrl: 'views/ui-elements/icons.html',
-                    url: '/icons'
-                })
-                .state('dashboard.grid', {
-                    templateUrl: 'views/ui-elements/grid.html',
-                    url: '/grid'
+                .state('dashboard.perfil', {
+                    templateUrl: 'views/perfil.html',
+                    url: '/perfil',
+                    resolve: {
+                        loadMyFile: function ($ocLazyLoad) {
+                            $ocLazyLoad.load({
+                                name: 'unicesarNNN'
+                            })
+                        }
+                    }
                 })
         }]);
 

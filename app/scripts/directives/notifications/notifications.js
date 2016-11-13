@@ -6,7 +6,7 @@
  * @description
  * # adminPosHeader
  */
-angular.module('energyApp')
+angular.module('unicesarNNN')
 	.directive('notifications',function(){
 		return {
         templateUrl:'scripts/directives/notifications/notifications.html',
